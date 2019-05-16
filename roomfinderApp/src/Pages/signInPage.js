@@ -1,17 +1,52 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import ConfirmModal from '../Modals/confirmModal'
 import { Container, Header, Form, Button, Grid, Input } from 'semantic-ui-react';
 
 class signInPage extends Component {
   state={}
-  handleChange = (e, { name, value }) => this.setState({ [name]: value })
-  handleSubmit = () => this.setState({ netID: '', password: '' })
+
+  userData = [
+    { name: 'Tom Jones', netID: 'taj123', password: 'password1', email: "thomasjones2020@u.northwestern.edu" },
+    { name: 'Alice Smith', netID: 'abs456', password: 'password2', email: "alicesmith2021@u.northwestern.edu" },
+    { name: 'Bobby Lee', netID: 'bgl789', password: 'password3', email: "bobbylee2019@u.northwestern.edu" },
+  ]
+
+  handleChange = (e, { name, value }) => {
+    this.setState({ [name]: value })
+    for (let i = 0; i < this.userData.length; i++) {
+      if (this.userData[i].netID === this.state.netID) {
+        this.setState({name: this.userData[i].name, email: this.userData[i].email})
+      } 
+    }
+  }
+  
+  handleSubmit = () => this.setState({showModal: true})
+
+  closeModal = () => this.setState({ netID: '', password: '', showModal: false})
 
   render() {
     document.body.style.backgroundColor = "blueviolet";
     const { netID, password } = this.state
-    console.log(netID, password)
-    return (
+
+    const validUser = () => {
+      for (let i = 0; i < this.userData.length; i++) {
+        if (this.userData[i].netID === this.state.netID && this.userData[i].password === this.state.password) {
+          return true
+        } 
+      }
+      return false
+    }
+
+    return ([
+      <ConfirmModal
+        open={this.state.showModal}
+        name={this.state.name}
+        email={this.state.email}
+        netID={this.state.netID}
+        closeModal={this.closeModal}
+        success={validUser()}
+      />,
+
       <Container style={{marginTop: "50px"}}>
       <Grid centered>
       <Grid.Row>
@@ -40,17 +75,14 @@ class signInPage extends Component {
                 onChange={this.handleChange}
               />
             </Form.Field>
-            <Link to="/nextPage">
-              <Button 
-                type="submit" 
-                content="Login"
-              />
-            </Link>
+            <Button 
+              content="Login"
+            />
           </Form>
         </Grid.Row>
         </Grid>
       </Container>
-    )
+    ])
   }
 }
 
