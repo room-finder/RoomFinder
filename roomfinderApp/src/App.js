@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import SignInPage from './Pages/signInPage'
-import criteriaPage from './Pages/criteriaPage'
+import CriteriaPage from './Pages/criteriaPage'
 import roomsPage from './Pages/roomsPage'
 
 
@@ -13,7 +13,8 @@ class App extends Component {
         netID: '',
         name: '',
         email: ''
-      }
+      },
+      library: ''
     }
   }
 
@@ -21,13 +22,19 @@ class App extends Component {
     this.setState({ userData: signInData })
   }
 
+  updateLibrary = (lib) => {
+    this.setState({ library: lib})
+  }
+
   render() {
+    console.log(this.state.userData)
+    console.log(this.state.library)
     document.body.style.backgroundColor = "blueviolet";
     return [
       <BrowserRouter>
         <Switch>
-          <Route exact path='/' render={(props) => <SignInPage {...props} />} />
-          <Route exact path="/criteria" component={criteriaPage} />
+          <Route exact path='/' render={(props) => <SignInPage {...props} updateApp={this.updateUserData} />} />
+          <Route exact path="/criteria" component={() => <CriteriaPage updateApp={this.updateLibrary} />} />
           <Route exact path="/rooms" component={roomsPage} />
         </Switch>
       </BrowserRouter>

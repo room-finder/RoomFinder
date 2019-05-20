@@ -8,9 +8,9 @@ class SignInPage extends Component {
     this.state={
       netID: '',
       password: '',
+      submittedNetID: '',
       submittedName: '',
       submittedEmail: '',
-      submittedNetID: '',
       submittedPassword: '',
       error: false
     }
@@ -41,12 +41,8 @@ class SignInPage extends Component {
   
   handleSubmit = () => {
     const { netID, password } = this.state
+    this.updateAppData()
     this.setState({ submittedNetID: netID, submittedPassword: password, netID: '', password: '' })
-    for (let i = 0; i < this.userData.length; i++) {
-      if (this.userData[i].netID === this.state.netID) {
-        this.setState({submittedName: this.userData[i].name, submittedEmail: this.userData[i].email})
-      } 
-    }
     if (!this.validUser()) {
       this.setState({ error: true })
     }
@@ -55,12 +51,25 @@ class SignInPage extends Component {
     }
   }
 
-  render() {
-    console.log(this.state.submittedNetID)
-    console.log(this.state.submittedName)
-    console.log(this.state.submittedEmail)
-    const { netID, password } = this.state
+  updateAppData = () => {
+    var appUserData = {
+      netID: '',
+      name: '',
+      email: ''
+    }
+    const pos = this.userData.map((e) => { return e.netID; }).indexOf(this.state.netID);
+    if (pos > -1) {
+      appUserData = {
+        netID: this.userData[pos].netID,
+        name: this.userData[pos].name,
+        email: this.userData[pos].email
+      }
+    }
+    this.props.updateApp(appUserData)
+  }
 
+  render() {
+    const { netID, password } = this.state
     const InvalidInput = () => {
       if (this.state.error) {
         return (
@@ -80,7 +89,8 @@ class SignInPage extends Component {
       if (this.validUser()) {
         return (
           <Link to="/criteria">
-            <Button 
+            <Button
+              onClick={this.updateAppData}
               content="Login" 
               style={{ backgroundColor: "lavender", color: "blueviolet" }}
             />

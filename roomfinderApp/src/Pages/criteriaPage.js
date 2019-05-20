@@ -10,22 +10,26 @@ const libraries = [
   { key: 'main', text: 'Main', value: 'main'}
 ]
 
-class criteriaPage extends Component {
-  state = {
-    date: '',
-    library: ''
+class CriteriaPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: '',
+      library: '',
+    }
+    this.handleChange = this.handleChange.bind(this)
   }
 
   handleChange = (e, {name, value}) => {
-    if (this.state.hasOwnProperty(name)) {
-      this.setState({ [name]: value })
-    }
+    this.setState({ [name]: value })
+  }
+
+  updateAppData = () => {
+    const library = this.state.library
+    this.props.updateApp(library)
   }
 
   render () {
-    console.log(this.state.library)
-    console.log(this.state.date)
-
     return ([
       <Segment textAlign='center' style={{borderRadius: '0px'}}>
         <Header 
@@ -43,7 +47,7 @@ class criteriaPage extends Component {
             />
           </Grid.Row>
           <Grid.Row>
-            <Form inverted>
+            <Form inverted onSubmit={this.handleSubmit}>
               <Form.Select 
                 options={libraries}
                 placeholder="Library"
@@ -66,6 +70,7 @@ class criteriaPage extends Component {
               />
               <Link to="/rooms">
                 <Button 
+                  onClick={this.updateAppData}
                   content="Next" 
                   style={{ backgroundColor: "lavender", color: "blueviolet" }}
                 />
@@ -78,4 +83,4 @@ class criteriaPage extends Component {
   }
 }
 
-export default criteriaPage
+export default CriteriaPage
