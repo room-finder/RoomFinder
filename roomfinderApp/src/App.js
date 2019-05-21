@@ -29,8 +29,23 @@ class App extends Component {
   updateLibrary = (libCriteria) => {
     this.setState({ criteria: libCriteria})
   }
+
+  displayTimeTo = () => {
+    if (this.state.criteria.timeTo[0] === "0")
+      return this.state.criteria.timeTo.substring(1)
+    else 
+      return this.state.criteria.timeTo
+  }
+
+  displayTimeFrom = () => {
+    if (this.state.criteria.timeFrom[0] === "0")
+      return this.state.criteria.timeFrom.substring(1)
+    else 
+      return this.state.criteria.timeFrom
+  }
   
   render() {
+    console.log(this.state.userData)
     return [
       <BrowserRouter>
         <Switch>
@@ -42,8 +57,8 @@ class App extends Component {
             render={(props) => 
               <RoomsPage 
                 lib={this.state.criteria.library}
-                timeFrom={this.state.criteria.timeFrom.substring(1)}
-                timeTo={this.state.criteria.timeTo.substring(1)}
+                timeFrom={this.displayTimeFrom()}
+                timeTo={this.displayTimeTo()}
                 date={this.state.criteria.date} />}
           />
         </Switch>

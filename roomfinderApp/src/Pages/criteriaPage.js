@@ -1,17 +1,13 @@
 import React, { Component } from 'react'
 import { Segment, Header, Container, Grid, Form, Button } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-import { DateInput } from 'semantic-ui-calendar-react'
+import { DateInput, TimeInput } from 'semantic-ui-calendar-react'
 import moment from 'moment'
 
 
 const libraries = [
   { key: 'mudd', text: 'Mudd', value: 'mudd'},
   { key: 'main', text: 'Main', value: 'main'}
-]
-
-const times = [
-  { }
 ]
 
 class CriteriaPage extends Component {
@@ -75,11 +71,35 @@ class CriteriaPage extends Component {
                 value={this.state.date}
                 onChange={this.handleChange}
                 popupPosition="bottom center"
-                duration={0}
+                duration="0"
                 hideMobileKeyboard
                 closable
                 dateFormat="MM-DD-YYYY"
                 minDate={moment().toDate()}
+              />
+              <TimeInput 
+                label="From:"
+                name="timeFrom"
+                placeholder="00:00"
+                value={this.state.timeFrom}
+                onChange={this.handleChange}
+                duration="0"
+                closable
+                popupPosition="bottom center"
+                timeFormat="AMPM"
+                hideMobileKeyboard
+              />
+              <TimeInput 
+                label="To:"
+                name="timeTo"
+                placeholder="00:00"
+                value={this.state.timeTo}
+                onChange={this.handleChange}
+                duration="0"
+                closable
+                popupPosition="bottom center"
+                timeFormat="AMPM"
+                hideMobileKeyboard
               />
               <Link to="/rooms">
                 <Button 
