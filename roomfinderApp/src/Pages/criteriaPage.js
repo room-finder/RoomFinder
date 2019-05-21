@@ -10,12 +10,18 @@ const libraries = [
   { key: 'main', text: 'Main', value: 'main'}
 ]
 
+const times = [
+  { }
+]
+
 class CriteriaPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       date: '',
       library: '',
+      timeFrom: '',
+      timeTo: ''
     }
     this.handleChange = this.handleChange.bind(this)
   }
@@ -25,8 +31,13 @@ class CriteriaPage extends Component {
   }
 
   updateAppData = () => {
-    const library = this.state.library
-    this.props.updateApp(library)
+    var criteria = {
+     library: this.state.library,
+     date: this.state.date,
+     timeFrom: this.state.timeFrom,
+     timeTo: this.state.timeTo
+    }
+    this.props.updateApp(criteria)
   }
 
   render () {
@@ -39,16 +50,18 @@ class CriteriaPage extends Component {
       </Segment>,
       <Container style={{marginTop: "30px"}}>
         <Grid centered>
+          <Segment>
           <Grid.Row>
             <Header
-              as="h2"
-              content="Pick a Library and Date"
-              inverted
+              as="h3"
+              content="Pick a Library, Date, and Time"
             />
           </Grid.Row>
+          <br/>
           <Grid.Row>
-            <Form inverted onSubmit={this.handleSubmit}>
+            <Form size="small" onSubmit={this.handleSubmit}>
               <Form.Select 
+                label="Library"
                 options={libraries}
                 placeholder="Library"
                 name="library"
@@ -56,13 +69,13 @@ class CriteriaPage extends Component {
                 onChange={this.handleChange}
               />
               <DateInput
-                inline
+                label="Date"
                 name="date"
-                placeholder="Date"
+                placeholder="MM/DD/YYYY"
                 value={this.state.date}
                 onChange={this.handleChange}
                 popupPosition="bottom center"
-                duration="0"
+                duration={0}
                 hideMobileKeyboard
                 closable
                 dateFormat="MM-DD-YYYY"
@@ -72,11 +85,12 @@ class CriteriaPage extends Component {
                 <Button 
                   onClick={this.updateAppData}
                   content="Next" 
-                  style={{ backgroundColor: "lavender", color: "blueviolet" }}
+                  style={{ backgroundColor: "blueviolet", color: "white" }}
                 />
               </Link>
             </Form>
           </Grid.Row>
+          </Segment>
         </Grid>
       </Container>
     ])
@@ -84,3 +98,4 @@ class CriteriaPage extends Component {
 }
 
 export default CriteriaPage
+

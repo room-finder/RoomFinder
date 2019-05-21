@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Menu, Segment, Container, Header, Form, Button, Grid, Message } from 'semantic-ui-react';
+import { Segment, Container, Header, Form, Button, Grid, Message } from 'semantic-ui-react';
 import { Link } from 'react-router-dom'
 
 class SignInPage extends Component {
@@ -92,7 +92,7 @@ class SignInPage extends Component {
             <Button
               onClick={this.updateAppData}
               content="Login" 
-              style={{ backgroundColor: "lavender", color: "blueviolet" }}
+              style={{backgroundColor: "blueviolet", color: "white"}}
             />
           </Link>
         )
@@ -101,7 +101,7 @@ class SignInPage extends Component {
         return (
           <Button 
             content="Login" 
-            style={{ backgroundColor: "lavender", color: "blueviolet" }}
+            style={{backgroundColor: "blueviolet", color: "white"}}
           />
         )
       }
@@ -114,34 +114,38 @@ class SignInPage extends Component {
           style={{ color: "blueviolet" }}
           content="RoomFinder" />
       </Segment> ,
-      <Container style={{marginTop: "30px"}}>
+      <Container style={{marginTop: "50px"}}>
         <Grid centered>
-          <Grid.Row>
-              <Header 
-                as="h2"
-                inverted 
-                content="Sign In With Your NetID"
-              />
-            </Grid.Row>
-            <Grid.Row>
-              <Form onSubmit={this.handleSubmit} inverted> 
-                <Form.Input
-                  name="netID" 
-                  value={netID} 
-                  placeholder="NetID"
-                  onChange={this.handleChange}
+          <Segment>
+            <Grid.Row> 
+                <Header 
+                  as="h3"
+                  content="Sign In With Your NetID"
                 />
-                <Form.Input
-                  type="password"
-                  name="password" 
-                  value={password} 
-                  placeholder="Password"
-                  onChange={this.handleChange}
-                />
-                <SubmitButton />
-              </Form>
+              </Grid.Row>
+              <br/>
+              <Grid.Row>
+                <Form size="tiny" onSubmit={this.handleSubmit}> 
+                  <Form.Input
+                    name="netID" 
+                    value={netID} 
+                    placeholder="NetID"
+                    onChange={this.handleChange}
+                  />
+                  <Form.Input
+                    type="password"
+                    name="password" 
+                    value={password} 
+                    placeholder="Password"
+                    onChange={this.handleChange}
+                  />
+                  <SubmitButton />
+                </Form>
+              </Grid.Row>
+            </Segment>
+            <Grid.Row> 
+              <InvalidInput />
             </Grid.Row>
-            <InvalidInput />
           </Grid>
       </Container>
     ])
