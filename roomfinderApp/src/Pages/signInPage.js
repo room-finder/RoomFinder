@@ -108,7 +108,7 @@ class SignInPage extends Component {
     }
 
     return ([
-      <Segment textAlign='center' style={{borderRadius: '0px'}}>
+      <Segment style={{borderRadius: '0px', height: "60px"}}>
         <Header 
           as="h2"
           style={{ color: "blueviolet" }}

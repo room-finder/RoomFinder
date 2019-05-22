@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Segment, Header, Container, Grid, Form, Button, Input } from 'semantic-ui-react'
+import { Segment, Header, Container, Grid, Form, Button, Message } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 import { DateInput, TimeInput } from 'semantic-ui-calendar-react'
@@ -9,6 +9,7 @@ const libraries = [
   { key: 'main', text: 'Main', value: 'main'}
 ]
 
+/*** Code for Time Input *******************************/
 const addTimes = (nextHr, ampm, selectTimes) => {
   if (ampm === ' AM') {
     for (let i = nextHr; i <= 11; i++) {
@@ -28,6 +29,7 @@ const addTimes = (nextHr, ampm, selectTimes) => {
     }
   }
 }
+/*****************************************************/
 
 class CriteriaPage extends Component {
   constructor(props) {
@@ -36,13 +38,33 @@ class CriteriaPage extends Component {
       date: '',
       library: '',
       timeFrom: '',
-      timeTo: ''
+      timeTo: '',
+      formError: false
     }
     this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange = (e, {name, value}) => {
     this.setState({ [name]: value })
+  }
+
+  triggerError = () => {
+    if (this.state.library === '' || this.state.date === '' 
+    || this.state.timeFrom === '' || this.state.timeTo === '') {
+      return true 
+    }
+    return false
+  }
+
+  handleSubmit = () => {
+    this.updateAppData()
+    if (this.triggerError()) {
+      this.setState({ formError: true})
+    }
+    else {
+      this.setState({ formError: false })
+    }
   }
 
   updateAppData = () => {
@@ -56,6 +78,41 @@ class CriteriaPage extends Component {
   }
 
   render () {
+    const FormError = () => {
+      if (this.state.formError) {
+        return (
+          <Message 
+            visible 
+            error
+            header="Please complete all fields"
+          />
+        )
+      } else return null
+    }
+
+    const SubmitButton = () => {
+      if (!this.triggerError()) {
+        return (
+          <Link to="/rooms">
+              <Button 
+                onClick={this.handleSubmit}
+                content="Next" 
+                style={{ backgroundColor: "blueviolet", color: "white" }}
+              />
+          </Link>
+        )
+      }
+      else {
+        return (
+          <Button 
+            content="Next" 
+            style={{ backgroundColor: "blueviolet", color: "white" }}
+          />
+        )
+      }
+    }
+
+    /*** Code for Time Input ********************************************************************/
     const timeFromOptions = () => {
       let currTime = moment().format('LT')
       let n = currTime.indexOf(':') + 1
@@ -95,28 +152,61 @@ class CriteriaPage extends Component {
     }
     const fromTimes = timeFromOptions() 
 
-    const timeToOptions = () => {
-      const val = this.state.timeFrom
+    const timeToOptions = () => { 
       if (this.state.timeFrom !== '') {
-        let index = fromTimes.map((obj) => { return obj.text; }).indexOf(val);
-        let start = parseInt(fromTimes[index].key) + 1
-        let end = start + 6
+        let index = fromTimes.map((obj) => { return obj.value; }).indexOf(this.state.timeFrom);
         const selectTimes = []
-        for (let i = start; i < end; i++) {
-          selectTimes.push(fromTimes[i])
+        let eleven30 = { key: "49", text: "11:30 PM", value: "11:30 PM"}
+        let midnight = { key: "50", text: "12:00 AM", value: "12:00 AM"}
+        if (fromTimes[index].text === "11:00 PM") {
+          selectTimes.push(eleven30, midnight)
+        } 
+        else if (fromTimes[index].text === "11:30 PM") {
+          selectTimes.push(midnight)
+        }
+        else { 
+          let start = parseInt(fromTimes[index].key) + 1
+          if (parseInt(fromTimes[index].text) >=  9) {
+            let n = fromTimes.length - 1
+            let end = parseInt(fromTimes[n].key)
+            for(let i = start; i < end; i++) {
+              selectTimes.push(fromTimes[i])
+            }
+            selectTimes.push(eleven30, midnight)
+          }
+          else {
+            let end = start + 6
+            for(let i = start; i < end; i++) {
+              selectTimes.push(fromTimes[i])
+            }
+          }
         }
         return selectTimes
-      } else return null 
+      } else return null
     }
     const toTimes = timeToOptions()
-    console.log(toTimes)
+    /************************************************************************************/
 
     return ([
-      <Segment textAlign='center' style={{borderRadius: '0px'}}>
-        <Header 
-          as="h2"
-          style={{ color: "blueviolet" }}
-          content="RoomFinder" />
+      <Segment style={{borderRadius: '0px', height: "60px"}}>
+        <Grid columns="equal">
+          <Grid.Column width={11}> 
+            <Header 
+              as="h2"
+              style={{ color: "blueviolet"}}
+              content="RoomFinder" 
+            />
+          </Grid.Column>
+          <Grid.Column>
+            <Button 
+              floated="right" 
+              compact as={Link} 
+              to="/" 
+              content="Logout"
+              style={{backgroundColor: "blueviolet", color: "white"}}
+            />
+          </Grid.Column>
+        </Grid>
       </Segment>,
       <Container style={{marginTop: "30px"}}>
         <Grid centered>
@@ -125,16 +215,21 @@ class CriteriaPage extends Component {
             <Header
               as="h3"
               content="Pick a Library, Date, and Time"
+              style={{marginBottom: "0px"}}
             />
+            <i style={{marginTop: "0px", color: "mediumpurple"}}>
+              Note:  Max time window = 3 hours.
+            </i>
           </Grid.Row>
           <br/>
           <Grid.Row>
             <Form size="small" onSubmit={this.handleSubmit}>
+              <FormError /> 
               <Form.Select 
                 label="Library"
                 options={libraries}
-                placeholder="Library"
                 name="library"
+                placeholder="Library"
                 value={this.state.library}
                 onChange={this.handleChange}
               />
@@ -146,13 +241,14 @@ class CriteriaPage extends Component {
                 value={this.state.date}
                 onChange={this.handleChange}
                 dateFormat="MM-DD-YYYY"
-                durati  on={0}
+                duration={0}
                 closable
                 minDate={moment().toDate()}
                 hideMobileKeyboard
-                popupPosition="bottom center"
+                popupPosition='bottom center'
               />
               <Form.Select 
+                placeholder="0:00"
                 label="From: "
                 name="timeFrom"
                 options={fromTimes}
@@ -160,19 +256,14 @@ class CriteriaPage extends Component {
                 onChange={this.handleChange}
               />
               <Form.Select 
+                placeholder="0:00"
                 label="To: "
                 name="timeTo"
                 options={toTimes}
                 value={this.state.timeTo}
                 onChange={this.handleChange}
               />
-              <Link to="/rooms">
-                <Button 
-                  onClick={this.updateAppData}
-                  content="Next" 
-                  style={{ backgroundColor: "blueviolet", color: "white" }}
-                />
-              </Link>
+              <SubmitButton />
             </Form>
           </Grid.Row>
           </Segment>
@@ -183,4 +274,3 @@ class CriteriaPage extends Component {
 }
 
 export default CriteriaPage
-
