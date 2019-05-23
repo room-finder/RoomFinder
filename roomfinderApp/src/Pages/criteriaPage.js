@@ -166,7 +166,8 @@ class CriteriaPage extends Component {
         }
         else { 
           let start = parseInt(fromTimes[index].key) + 1
-          if (parseInt(fromTimes[index].text) >=  9) {
+          if (parseInt(fromTimes[index].text) >=  9 && fromTimes[index].text.includes("PM")
+          && parseInt(fromTimes[index].text) !== 12) {
             let n = fromTimes.length - 1
             let end = parseInt(fromTimes[n].key)
             for(let i = start; i < end; i++) {

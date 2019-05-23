@@ -7,7 +7,6 @@ class RoomsPage extends Component {
     super(props);
     this.state = {
       selectedRoom: '',
-      timeSlot: ''
     }
   }
 
@@ -16,50 +15,50 @@ class RoomsPage extends Component {
       if (this.props.lib==="mudd") {
         return ([
           <Grid.Row>
-            <Menu vertical style={{textAlign: "left"}}>
-              <Menu.Item style={{backgroundColor: "blueviolet"}}>
+            <Menu fluid vertical style={{textAlign: "left"}}>
+              <Menu.Item style={{backgroundColor: "lavender"}}>
                 <Header 
                   as="h4" 
                   inverted
                   content="Group Study Rooms" 
-                  style={{textAlign: "center"}}
+                  style={{textAlign: "center", color: "blueviolet"}}
                 />
               </Menu.Item>
               <Menu.Item name="Mudd 2142">
-                <Header style={{marginBottom: "0px"}} as="h5" content="Mudd 2144" />
-                <strong style={{color: "grey"}}>Information</strong>
+                <Header style={{marginBottom: "0px"}} as="h5" content="Mudd 2142" />
+                <p style={{color: "grey"}}>60" Display | 1 Large Table | 6 Chairs</p>
               </Menu.Item>
               <Menu.Item name="Mudd 2146">
                 <Header style={{marginBottom: "0px"}} as="h5" content="Mudd 2146" />
-                <strong style={{color: "grey"}}>Information</strong>
+                <p style={{color: "grey"}}>60" Display | 1 Large Table | 2 Bench Seats</p>
               </Menu.Item>
               <Menu.Item name="Mudd 2148">
                 <Header style={{marginBottom: "0px"}} as="h5" content="Mudd 2148" />
-                <strong style={{color: "grey"}}>Information</strong>
+                <p style={{color: "grey"}}>60" Display | 1 Large Table | 6 chairs</p>
               </Menu.Item>
-              <Menu.Item name="Mudd 2150">
-                <Header style={{marginBottom: "0px"}} as="h5" content="Mudd 2142" />
-                <strong style={{color: "grey"}}>Information</strong>
+              <Menu.Item name="Mudd 2151">
+                <Header style={{marginBottom: "0px"}} as="h5" content="Mudd 2151" />
+                <p style={{color: "grey"}}>60" Display | 3 Small Tables | 2 Soft Chairs</p>
               </Menu.Item>
             </Menu>
           </Grid.Row>,
           <Grid.Row>
-            <Menu vertical style={{textAlign: "left"}}>
-              <Menu.Item style={{backgroundColor: "blueviolet"}}>
+            <Menu fluid vertical style={{textAlign: "left"}}>
+              <Menu.Item style={{backgroundColor: "lavender"}}>
                 <Header 
                   as="h4" 
                   inverted
                   content="Large Study Rooms" 
-                  style={{textAlign: "center"}}
+                  style={{textAlign: "center", color: "blueviolet"}}
                 />
               </Menu.Item>
               <Menu.Item name="Mudd 2174">
-                <Header style={{marginBottom: "0px"}} as="h5" content="Mudd 2144" />
-                <strong style={{color: "grey"}}>Information</strong>
+                <Header style={{marginBottom: "0px"}} as="h5" content="Mudd 2174" />
+                <p style={{color: "grey"}}>80" Display | 1 Table | 12 chairs</p>
               </Menu.Item>
               <Menu.Item name="Mudd 2176">
-                <Header style={{marginBottom: "0px"}} as="h5" content="Mudd 2146" />
-                <strong style={{color: "grey"}}>Information</strong>
+                <Header style={{marginBottom: "0px"}} as="h5" content="Mudd 2174" />
+                <p style={{color: "grey"}}>80" Display | 2 Tables | Bench Seat | 4 Chairs</p>
               </Menu.Item>
             </Menu>
           </Grid.Row>
@@ -67,46 +66,45 @@ class RoomsPage extends Component {
       } else if (this.props.lib==="main") {
         return ([
           <Grid.Row>
-            <Menu vertical style={{textAlign: "left"}}>
-              <Menu.Item style={{backgroundColor: "blueviolet"}}>
+            <Menu fluid vertical style={{textAlign: "left"}}>
+              <Menu.Item style={{backgroundColor: "lavender"}}>
                 <Header 
                   as="h4" 
                   inverted
                   content="Core Study Rooms" 
-                  style={{textAlign: "center"}}
+                  style={{textAlign: "center", color: "blueviolet"}}
                 />
               </Menu.Item>
-              <Menu.Item name="Mudd 2148">
+              <Menu.Item name="Core B">
                 <Header style={{marginBottom: "0px"}} as="h5" content="Core B" />
-                <strong style={{color: "grey"}}>Information</strong>
+                <p style={{color: "grey"}}>1 Whiteboard | 1 Table | 4 Chairs</p>
               </Menu.Item>
-              <Menu.Item name="Mudd 2148">
+              <Menu.Item name="Core C">
                 <Header style={{marginBottom: "0px"}} as="h5" content="Core C" />
-                <strong style={{color: "grey"}}>Information</strong>
+                <p style={{color: "grey"}}>1 Whiteboard | 1 Table | 4 Chairs</p>
               </Menu.Item>
-              <Menu.Item name="Mudd 2148">
+              <Menu.Item name="Core D">
                 <Header style={{marginBottom: "0px"}} as="h5" content="Core D" />
-                <strong style={{color: "grey"}}>Information</strong>
+                <p style={{color: "grey"}}>1 Whiteboard | 1 Table | 4 Chairs</p>
               </Menu.Item>
             </Menu>
           </Grid.Row>,
           <Grid.Row>
-            <Menu vertical style={{textAlign: "left"}}>
-              <Menu.Item style={{backgroundColor: "blueviolet"}}>
+            <Menu fluid vertical style={{textAlign: "left"}}>
+              <Menu.Item style={{backgroundColor: "lavender"}}>
                 <Header 
                   as="h4" 
-                  inverted
                   content="Project Rooms" 
-                  style={{textAlign: "center"}}
+                  style={{textAlign: "center", color: "blueviolet"}}
                 />
               </Menu.Item>
-              <Menu.Item name="Mudd 2174">
+              <Menu.Item name="1South A">
                 <Header style={{marginBottom: "0px"}} as="h5" content="1South Project Room A" />
-                <strong style={{color: "grey"}}>Information</strong>
+                <p style={{color: "grey"}}>3 Tables | 10 Chairs | Movable Furniture</p>
               </Menu.Item>
-              <Menu.Item name="Mudd 2176">
+              <Menu.Item name="1South B">
                 <Header style={{marginBottom: "0px"}} as="h5" content="1South Project Room B" />
-                <strong style={{color: "grey"}}>Information</strong>
+                <p style={{color: "grey"}}>2 Tables | 10 Chairs | Movable Furniture</p>
               </Menu.Item>
             </Menu>
           </Grid.Row>
@@ -148,20 +146,20 @@ class RoomsPage extends Component {
         </Grid>
       </Segment>,
       <Container style={{ marginTop: "30px" }}>
-        <Grid centered>
-          <Segment> 
-            <LibraryHeader />
-            <Header as="h5" style={{marginTop: '0px', color: "grey"}}>
-              {this.props.date} | {this.props.timeFrom} - {this.props.timeTo}
-            </Header>
-            <Link to="/criteria" style={{color: "blueviolet"}} style={{marginBottom: "0px"}}>
-              <Button 
-                fluid 
-                compact 
-                content="Back To Options" 
-                style={{backgroundColor: "blueviolet", color: "white"}}/>
-            </Link>
-          </Segment>
+        <Segment textAlign="center"> 
+          <LibraryHeader />
+          <Header as="h5" style={{marginTop: '0px', color: "grey"}}>
+            {this.props.date} | {this.props.timeFrom} - {this.props.timeTo}
+          </Header>
+          <Link to="/criteria" style={{color: "blueviolet"}} style={{marginBottom: "0px"}}>
+            <Button 
+              fluid 
+              compact 
+              content="Back To Options" 
+              style={{backgroundColor: "blueviolet", color: "white"}}/>
+          </Link>
+        </Segment>
+        <Grid container centered>
           <Rooms />
         </Grid>
       </Container>
