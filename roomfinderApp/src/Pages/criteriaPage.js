@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import { Segment, Header, Container, Grid, Form, Button, Message } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
-import { DateInput, TimeInput } from 'semantic-ui-calendar-react'
+import { DateInput } from 'semantic-ui-calendar-react'
 
 const libraries = [
   { key: 'mudd', text: 'Mudd', value: 'mudd'},
   { key: 'main', text: 'Main', value: 'main'}
 ]
+
+
 
 /*** Code for Time Input *******************************/
 const addTimes = (nextHr, ampm, selectTimes) => {
