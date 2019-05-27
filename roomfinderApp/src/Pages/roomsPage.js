@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Menu, Segment, Header, Container, Grid, Icon, Button} from 'semantic-ui-react'
+import { Menu, Segment, Header, Container, Grid, Button} from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 class RoomsPage extends Component {
@@ -10,7 +10,12 @@ class RoomsPage extends Component {
     }
   }
 
+  handleItemClick = (e, { name }) => this.setState({ selectedRoom: name })
+
+
   render() {
+    const { selectedRoom } = this.state
+
     const Rooms = () => {
       if (this.props.lib==="mudd") {
         return ([
@@ -24,19 +29,35 @@ class RoomsPage extends Component {
                   style={{textAlign: "center", color: "blueviolet"}}
                 />
               </Menu.Item>
-              <Menu.Item name="Mudd 2142">
+              <Menu.Item 
+                name="Mudd 2142" 
+                active={selectedRoom === "Mudd 2142"}
+                onClick={this.handleItemClick}
+              >
                 <Header style={{marginBottom: "0px"}} as="h5" content="Mudd 2142" />
                 <p style={{color: "grey"}}>60" Display | 1 Large Table | 6 Chairs</p>
               </Menu.Item>
-              <Menu.Item name="Mudd 2146">
+              <Menu.Item 
+                name="Mudd 2146" 
+                active={selectedRoom === "Mudd 2146"}
+                onClick={this.handleItemClick}
+              >
                 <Header style={{marginBottom: "0px"}} as="h5" content="Mudd 2146" />
                 <p style={{color: "grey"}}>60" Display | 1 Large Table | 2 Bench Seats</p>
               </Menu.Item>
-              <Menu.Item name="Mudd 2148">
+              <Menu.Item 
+                name="Mudd 2148" 
+                active={selectedRoom === "Mudd 2148"}
+                onClick={this.handleItemClick}
+              >
                 <Header style={{marginBottom: "0px"}} as="h5" content="Mudd 2148" />
                 <p style={{color: "grey"}}>60" Display | 1 Large Table | 6 chairs</p>
               </Menu.Item>
-              <Menu.Item name="Mudd 2151">
+              <Menu.Item 
+                name="Mudd 2151" 
+                active={selectedRoom === "Mudd 2151"}
+                onClick={this.handleItemClick}
+              >
                 <Header style={{marginBottom: "0px"}} as="h5" content="Mudd 2151" />
                 <p style={{color: "grey"}}>60" Display | 3 Small Tables | 2 Soft Chairs</p>
               </Menu.Item>
@@ -52,12 +73,20 @@ class RoomsPage extends Component {
                   style={{textAlign: "center", color: "blueviolet"}}
                 />
               </Menu.Item>
-              <Menu.Item name="Mudd 2174">
+              <Menu.Item 
+                name="Mudd 2174" 
+                active={selectedRoom === "Mudd 2174"}
+                onClick={this.handleItemClick}
+              >
                 <Header style={{marginBottom: "0px"}} as="h5" content="Mudd 2174" />
                 <p style={{color: "grey"}}>80" Display | 1 Table | 12 chairs</p>
               </Menu.Item>
-              <Menu.Item name="Mudd 2176">
-                <Header style={{marginBottom: "0px"}} as="h5" content="Mudd 2174" />
+              <Menu.Item 
+                name="Mudd 2176" 
+                active={selectedRoom === "Mudd 2176"}
+                onClick={this.handleItemClick}
+              >
+                <Header style={{marginBottom: "0px"}} as="h5" content="Mudd 2176" />
                 <p style={{color: "grey"}}>80" Display | 2 Tables | Bench Seat | 4 Chairs</p>
               </Menu.Item>
             </Menu>
@@ -75,15 +104,27 @@ class RoomsPage extends Component {
                   style={{textAlign: "center", color: "blueviolet"}}
                 />
               </Menu.Item>
-              <Menu.Item name="Core B">
+              <Menu.Item 
+                name="Core B" 
+                active={selectedRoom === "Core B"}
+                onClick={this.handleItemClick}
+              >
                 <Header style={{marginBottom: "0px"}} as="h5" content="Core B" />
                 <p style={{color: "grey"}}>1 Whiteboard | 1 Table | 4 Chairs</p>
               </Menu.Item>
-              <Menu.Item name="Core C">
+              <Menu.Item 
+                name="Core C" 
+                active={selectedRoom === "Core C"}
+                onClick={this.handleItemClick}
+              >
                 <Header style={{marginBottom: "0px"}} as="h5" content="Core C" />
                 <p style={{color: "grey"}}>1 Whiteboard | 1 Table | 4 Chairs</p>
               </Menu.Item>
-              <Menu.Item name="Core D">
+              <Menu.Item 
+                name="Core D" 
+                active={selectedRoom === "Core D"}
+                onClick={this.handleItemClick}
+              >
                 <Header style={{marginBottom: "0px"}} as="h5" content="Core D" />
                 <p style={{color: "grey"}}>1 Whiteboard | 1 Table | 4 Chairs</p>
               </Menu.Item>
@@ -98,11 +139,19 @@ class RoomsPage extends Component {
                   style={{textAlign: "center", color: "blueviolet"}}
                 />
               </Menu.Item>
-              <Menu.Item name="1South A">
+              <Menu.Item 
+                name="1South A" 
+                active={selectedRoom === "1South A"}
+                onClick={this.handleItemClick}
+              >
                 <Header style={{marginBottom: "0px"}} as="h5" content="1South Project Room A" />
                 <p style={{color: "grey"}}>3 Tables | 10 Chairs | Movable Furniture</p>
               </Menu.Item>
-              <Menu.Item name="1South B">
+              <Menu.Item 
+                name="1South B" 
+                active={selectedRoom === "1South B"}
+                onClick={this.handleItemClick}
+              >
                 <Header style={{marginBottom: "0px"}} as="h5" content="1South Project Room B" />
                 <p style={{color: "grey"}}>2 Tables | 10 Chairs | Movable Furniture</p>
               </Menu.Item>
@@ -151,7 +200,7 @@ class RoomsPage extends Component {
           <Header as="h5" style={{marginTop: '0px', color: "grey"}}>
             {this.props.date} | {this.props.timeFrom} - {this.props.timeTo}
           </Header>
-          <Link to="/criteria" style={{color: "blueviolet"}} style={{marginBottom: "0px"}}>
+          <Link to="/criteria" style={{color: "blueviolet"}}>
             <Button 
               fluid 
               compact 
