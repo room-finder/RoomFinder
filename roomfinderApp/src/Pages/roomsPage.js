@@ -1,21 +1,26 @@
 import React, { Component } from 'react'
-import { Menu, Segment, Header, Container, Grid, Button} from 'semantic-ui-react'
+import { Menu, Segment, Header, Container, Grid, Button, Modal} from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 class RoomsPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedRoom: '',
+      selectedRoom: '',   
+      showModal: false
     }
   }
 
-  handleItemClick = (e, { name }) => this.setState({ selectedRoom: name })
+  handleItemClick = (e, { name }) => {
+    this.setState({ selectedRoom: name, showModal: true })
+  }
 
+  updateAppData = () => {
+    this.props.updateApp(this.state.selectedRoom)
+  }
 
   render() {
     const { selectedRoom } = this.state
-
     const Rooms = () => {
       if (this.props.lib==="mudd") {
         return ([
@@ -194,6 +199,26 @@ class RoomsPage extends Component {
           </Grid.Column>
         </Grid>
       </Segment>,
+      <Modal open={this.state.showModal}>
+        <Modal.Header content="Confirm Reservation" />
+        <Modal.Content>
+          Confirm reservation for {this.state.selectedRoom}?
+        </Modal.Content>
+        <Modal.Actions>
+          <Button 
+            content="Yes" 
+            onClick={this.updateAppData}
+            as={Link} 
+            to="/confirm" 
+            style={{color: 'white', backgroundColor: 'green'}}
+          />
+          <Button 
+            content="No" 
+            onClick={() => this.setState({showModal: false})}
+            style={{color: 'white', backgroundColor: 'red'}} 
+          />
+        </Modal.Actions>
+      </Modal>,
       <Container style={{ marginTop: "30px" }}>
         <Segment textAlign="center"> 
           <LibraryHeader />
