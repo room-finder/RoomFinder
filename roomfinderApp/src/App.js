@@ -18,7 +18,8 @@ class App extends Component {
         library: '',
         date: '',
         timeFrom: '',
-        timeTo: ''
+        timeTo: '',
+        people: '',
       },
       roomNumber: ''
     }
@@ -82,6 +83,7 @@ class App extends Component {
                 timeFrom={this.state.criteria.timeFrom}
                 timeTo={this.state.criteria.timeTo}
                 date={this.state.criteria.date}
+                people={this.state.criteria.people}
               />
             } 
           />

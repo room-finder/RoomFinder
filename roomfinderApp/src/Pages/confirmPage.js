@@ -9,7 +9,7 @@ class ConfirmPage extends Component {
   }
 
   render() {
-    const { room, name, email, timeFrom, timeTo, date} = this.props
+    const { room, name, email, timeFrom, timeTo, date, people} = this.props
     return ([
       <Segment style={{borderRadius: '0px'}}>
         <Grid columns="equal">
@@ -28,6 +28,7 @@ class ConfirmPage extends Component {
           <p><strong style={{color: "blueviolet"}}>Name:</strong> {name} </p>
           <p><strong style={{color: "blueviolet"}}>When:</strong> {date} {timeFrom} — {timeTo}</p>
           <p><strong style={{color: "blueviolet"}}>Room:</strong> {room}</p>
+          <p><strong style={{color: "blueviolet"}}>Number of People:</strong> {people}</p>
           <p>Confirmation email sent to <p style={{color: "blueviolet"}}>{email}</p></p> 
           <Button 
             fluid

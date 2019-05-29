@@ -9,8 +9,6 @@ const libraries = [
   { key: 'main', text: 'Main', value: 'main'}
 ]
 
-
-
 /*** Code for Time Input *******************************/
 const addTimes = (nextHr, ampm, selectTimes) => {
   if (ampm === ' AM') {
@@ -31,7 +29,7 @@ const addTimes = (nextHr, ampm, selectTimes) => {
     }
   }
 }
-/*****************************************************/
+/******************************************************/
 
 class CriteriaPage extends Component {
   constructor(props) {
@@ -41,7 +39,8 @@ class CriteriaPage extends Component {
       library: '',
       timeFrom: '',
       timeTo: '',
-      formError: false
+      formError: false,
+      people: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -74,7 +73,8 @@ class CriteriaPage extends Component {
      library: this.state.library,
      date: this.state.date,
      timeFrom: this.state.timeFrom,
-     timeTo: this.state.timeTo
+     timeTo: this.state.timeTo,
+     people: this.state.people
     }
     this.props.updateApp(criteria)
   }
@@ -264,6 +264,13 @@ class CriteriaPage extends Component {
                 name="timeTo"
                 options={toTimes}
                 value={this.state.timeTo}
+                onChange={this.handleChange}
+              />
+              <Form.Input 
+                placeholder="0"
+                label="Number of People"
+                name="people"
+                value={this.state.people}
                 onChange={this.handleChange}
               />
               <SubmitButton />

@@ -23,6 +23,7 @@ class SignInPage extends Component {
     { name: 'Tom Jones', netID: 'taj123', password: 'password1', email: "thomasjones2020@u.northwestern.edu" },
     { name: 'Alice Smith', netID: 'abs456', password: 'password2', email: "alicesmith2021@u.northwestern.edu" },
     { name: 'Bobby Lee', netID: 'bgl789', password: 'password3', email: "bobbylee2019@u.northwestern.edu" },
+    { name: 'Demitra Del Fiacco', netID: 'dmf6017', password: 'demitra', email: "demitradelfiacco2021@u.northwestern.edu" }
   ]
 
   validUser = () => {
