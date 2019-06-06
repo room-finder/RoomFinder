@@ -272,6 +272,7 @@ class CriteriaPage extends Component {
                 name="people"
                 value={this.state.people}
                 onChange={this.handleChange}
+                type="number"
               />
               <SubmitButton />
             </Form>

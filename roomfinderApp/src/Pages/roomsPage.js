@@ -176,7 +176,7 @@ class RoomsPage extends Component {
           </Grid.Column>
         </Grid>
       </Segment>,
-      <Modal open={this.state.showModal}>
+      <Modal dimmer="inverted" open={this.state.showModal}>
         <Modal.Header content="Confirm Reservation" />
         <Modal.Content>
           Confirm reservation for {this.state.selectedRoom} from {this.props.timeFrom} to {this.props.timeTo}?
