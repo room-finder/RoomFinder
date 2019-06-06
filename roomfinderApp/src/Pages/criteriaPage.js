@@ -52,7 +52,7 @@ class CriteriaPage extends Component {
 
   triggerError = () => {
     if (this.state.library === '' || this.state.date === '' 
-    || this.state.timeFrom === '' || this.state.timeTo === '') {
+    || this.state.timeFrom === '' || this.state.timeTo === ''|| this.state.people === '') {
       return true 
     }
     return false
