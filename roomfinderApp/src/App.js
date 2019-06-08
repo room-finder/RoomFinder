@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import SignInPage from './Pages/signInPage'
 import CriteriaPage from './Pages/criteriaPage'
 import RoomsPage from './Pages/roomsPage'
+import ConfirmPage from './Pages/confirmPage'
 
 class App extends Component {
   constructor(props) {
@@ -17,8 +18,10 @@ class App extends Component {
         library: '',
         date: '',
         timeFrom: '',
-        timeTo: ''
-      }
+        timeTo: '',
+        people: '',
+      },
+      roomNumber: ''
     }
   }
 
@@ -28,6 +31,10 @@ class App extends Component {
 
   updateLibrary = (libCriteria) => {
     this.setState({ criteria: libCriteria})
+  }
+
+  updateRoom = (room) => {
+    this.setState({ roomNumber: room})
   }
 
   displayTimeTo = () => {
@@ -46,20 +53,39 @@ class App extends Component {
   
   render() {
     console.log(this.state.userData)
+    console.log(this.state.criteria)
+    console.log(this.state.roomNumber)
     return [
       <BrowserRouter>
         <Switch>
-          <Route exact path='/' render={(props) => <SignInPage {...props} updateApp={this.updateUserData} />} />
-          <Route exact path="/criteria" render={(props) => <CriteriaPage {...props} updateApp={this.updateLibrary} />} />
+          <Route exact path='/' render={() => <SignInPage updateApp={this.updateUserData} />} />
+          <Route exact path="/criteria" render={() => <CriteriaPage updateApp={this.updateLibrary} />} />
           <Route 
             exact 
             path="/rooms" 
-            render={(props) => 
+            render={() => 
               <RoomsPage 
                 lib={this.state.criteria.library}
                 timeFrom={this.displayTimeFrom()}
                 timeTo={this.displayTimeTo()}
-                date={this.state.criteria.date} />}
+                date={this.state.criteria.date} 
+                updateApp={this.updateRoom}
+              />}
+          />
+          <Route 
+            exact 
+            path='/confirm' 
+            render={() => 
+              <ConfirmPage
+                room={this.state.roomNumber}
+                email={this.state.userData.email}
+                name={this.state.userData.name}
+                timeFrom={this.state.criteria.timeFrom}
+                timeTo={this.state.criteria.timeTo}
+                date={this.state.criteria.date}
+                people={this.state.criteria.people}
+              />
+            } 
           />
         </Switch>
       </BrowserRouter>
