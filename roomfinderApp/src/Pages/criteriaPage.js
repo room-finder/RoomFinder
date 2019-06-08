@@ -52,7 +52,7 @@ class CriteriaPage extends Component {
 
   triggerError = () => {
     if (this.state.library === '' || this.state.date === '' 
-    || this.state.timeFrom === '' || this.state.timeTo === '') {
+    || this.state.timeFrom === '' || this.state.timeTo === ''|| this.state.people === '') {
       return true 
     }
     return false
@@ -272,6 +272,7 @@ class CriteriaPage extends Component {
                 name="people"
                 value={this.state.people}
                 onChange={this.handleChange}
+                type="number"
               />
               <SubmitButton />
             </Form>
